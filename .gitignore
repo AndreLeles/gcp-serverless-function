@@ -1,0 +1,15 @@
+built/
+logs/
+node_modules/
+*.log
+.DS_Store
+.nyc_output
+*.tmp.sh
+*tmp.txt
+coverage
+.npmrc
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

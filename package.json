@@ -1,0 +1,36 @@
+{
+ "version": "1.0.0",
+ "description": "",
+ "main": "index.js",
+ "scripts": {
+  "start": "node schedule/index.js",
+  "build": "npx tsc",
+  "version": "echo $npm_package_name:$npm_package_version",
+  "check-coverage": "vitest run --coverage",
+  "test": "vitest",
+  "sonarqube": "node node_modules/@omnichat/omnichat-code-quality/index.js"
+ },
+ "dependencies": {
+  "@aws-sdk/client-eventbridge": "3.398.0",
+  "puppeteer": "^22.5.0",
+  "readline-sync": "^1.4.10",
+  "serverless-esbuild": "1.45.1"
+ },
+ "devDependencies": {
+  "@omnichat/omnichat-code-quality": "1.0.1",
+  "@vitest/coverage-istanbul": "0.28.3",
+  "@vitest/ui": "0.28.3",
+  "serverless-domain-manager": "6.2.1",
+  "sonarqube-scanner": "2.8.1",
+  "ts-node": "9.1.1",
+  "typescript": "3.9.3",
+  "vite": "4.0.4",
+  "vite-tsconfig-paths": "4.0.5",
+  "vitest": "0.28.3",
+  "vitest-sonar-reporter": "0.3.3"
+ },
+ "keywords": [],
+ "author": "Automation pipeline",
+ "license": "ISC",
+ "name": "gcp-serverless-function"
+}

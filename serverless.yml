@@ -1,0 +1,50 @@
+frameworkVersion: '>=3.0.0'
+service: ${self:custom.platformName}
+provider:
+  name: aws
+  endpointType: REGIONAL
+  runtime: nodejs18.x
+  region: ${opt:region, 'us-east-1'}
+  lambdaHashingVersion: 20201221
+  stage: ${opt:stage, 'devel'}
+  stackName: ${self:custom.prefix}
+  apiName: ${self:custom.prefix}
+  tags:
+    service: ${self:service}
+    env: ${self:provider.stage}
+    billing: ${self:custom.prefix}
+  environment:
+    PLATFORM_NAME: ${self:custom.platformName}
+    ENV_STAGE: ${self:provider.stage}
+    LOG_LEVEL: ${file(./serverless.env.yml):${self:custom.stage}.LOG_LEVEL_CONSOLE}
+custom:
+  isProd:
+    prod: true
+  prefix: ${opt:stage, self:provider.stage}-${self:custom.platformName}
+  region: ${self:provider.region}
+  accountId: '568082450586'
+  stage: ${opt:stage, self:provider.stage}
+  esbuild:
+    bundle: true
+    minify: true
+    watch:
+      pattern:
+        - src/**/*.ts
+      ignore:
+        - .build
+        - dist
+        - node_modules
+        - .serverless
+  platformName: gcp-serverless-function
+plugins:
+  - serverless-esbuild
+functions:
+  hello:
+    name: ${self:custom.prefix}-hello
+    handler: src/handler.hello
+    role: LambdaRole
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: hello
