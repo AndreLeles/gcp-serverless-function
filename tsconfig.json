@@ -5,14 +5,14 @@
     "removeComments": true,
     "sourceMap": true,
     "target": "ES2020",
-    "outDir": "dist",
+    "outDir": "./",
     "module": "commonjs",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false
   },
-  "include": ["src/**/*.ts", "spec/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",

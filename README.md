@@ -1,5 +1,6 @@
-# gcp-serverless-function## 
-Usando Google Cloud Platform Serverless Framework : Um guia passo a passo
+# gcp-serverless-function
+Usando Google Cloud Platform Serverless Framework : 
+Um guia passo a passo
 
 ![doc/img/image01.png](doc/img/image01.png)
 
@@ -42,30 +43,85 @@ npm -v # should print `10.5.0`
 
 Execute o seguinte comando no terminal para implantar sua aplicação usando o Serverless Framework:
 
+Adicione as seguintes permissão na conta de serviço defaul para realização de deploy
+Pegue o Id da conta (My First Project)
+
+![doc/img/getIdProject.png](doc/img/getIdProject.png)
+
+Apois pega a id realize o login com sua conta principal.
+
+```sh
+ gcloud auth application-default login
+```
+
+Apois realizar o login e preciso executar o comando abaixo para adicionar a permissão para conta defaul de serviço que ja existe..
+
+Primeir acesse o IAM e var em conta de Serviço conforme a imagem:
+
+![doc/img/acessoContoServico.png](doc/img/acessoContoServico.png)
+
+Agora no comando abaixo substitua dos dados pelo o que foi coletado.
+
+YOUR_PROJECT_ID = chromatic-baton-123-g2
+
+NAME@YOUR_PROJECT_ID.iam.gserviceaccount.com = chromatic-baton-123-g2@appspot.gserviceaccount.com
+```sh
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID --member "serviceAccount:NAME@YOUR_PROJECT_ID.iam.gserviceaccount.com" --role "roles/owner"
+```
+
+Apois essa configuração execute o deploy abaixo:
+
 [Link Documentação Site Oficial](https://www.serverless.com/framework/docs/providers/google/guide/services)
+
+[Link Documentação para criar um endpoint api-rest](https://www.serverless.com/framework/docs/providers/google/events/http)
 
 
 ```sh
-serverless deploy 
+sls deploy
 ```
+
+O resultado com sucesso do Deploy:
+
+![doc/img/deploySucesso.png](doc/img/deploySucesso.png)
+
+
+Imagem na console da google Cloud com Deploy com sucesso:
+
+![doc/img/imageDeployConsole.png](doc/img/imageDeployConsole.png)
+
+Enviando requisição para testa lambda:
+
+A url pegue a que retornou com sucesso durante o deploy
+
+```sh
+curl -X POST https://us-central1-chromatic-baton-422517-g2.cloudfunctions.net/devel-gcp-serverless-function-hello -H "Authorization: bearer $(gcloud auth print-identity-token)" -H "Content-Type: application/json"  -w "\n %{http_code}\n"
+
+```
+
+Resultado do comando curl no endpoint da lambda Funtion
+
+![doc/img/curlEndPoint.png](doc/img/curlEndPoint.png)
+
 
 ### Verifique mensagem de logs:
 
 ```sh
-serverless deploy 
+serverless logs -f hello
 ```
 
-### Para consultar o status do serviço 
+![doc/img/logs.png](doc/img/logs.png)
 
-O método mais simples para verificar se serviço  está ativo é consultar o endpoint de integridade:
-
-```sh
-curl http://localhost:4566/_localstack/health | jq
-```
 
 ## Encerrar o ambiente:
-Quando terminar de testar sua aplicação, execute o seguinte comando para encerrar o LocalStack e remover os contêineres Docker:
+Quando terminar de testar sua aplicação, execute o seguinte comando para remover a lambda:
 
 ```sh
-npm run infra:down 
+sls remove
 ```
+Resultado da deleção do ambiente:
+
+![doc/img/remove.png](doc/img/remove.png)
+
+Status pela console da google CLoud
+
+![doc/img/removeConsole.png](doc/img/removeConsole.png)

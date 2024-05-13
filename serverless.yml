@@ -2,9 +2,10 @@ frameworkVersion: '>=3.0.0'
 service: ${self:custom.platformName}
 provider:
   name: google
+  credentials: ".gcloud/keyfile.json"
   runtime: nodejs18
   stage: ${opt:stage, 'devel'}
-  project: ${self:custom.platformName}
+  project: "chromatic-baton-422517-g2"
   environment:
     PLATFORM_NAME: ${self:custom.platformName}
     ENV_STAGE: ${self:provider.stage}
@@ -17,20 +18,9 @@ custom:
 plugins:
   - serverless-google-cloudfunctions
 
-package:
-  include:
-    - ./src/handler.ts
-  exclude:
-    - node_modules/**
-    - .gitignore
-    - .git/**
-
 functions:
   hello:
     name: ${self:custom.prefix}-hello
-    handler: http
-    timeout: 30
+    handler: hello
     events:
-      - http:
-          path: hello
-          method: get
+      - http: true

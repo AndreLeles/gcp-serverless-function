@@ -9,7 +9,7 @@ node_modules/
 coverage
 .npmrc
 .gcloud
-
+.serverless/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
