@@ -1,22 +1,20 @@
 resources:
   - type: storage.v1.bucket
-    name: sls-gcp-serverless-function-devel-1715105413336
+    name: sls-gcp-serverless-function-devel-1715626554949
   - type: gcp-types/cloudfunctions-v1:projects.locations.functions
     name: devel-gcp-serverless-function-hello
     properties:
-      parent: projects/gcp-serverless-function/locations/us-central1
+      parent: projects/chromatic-baton-422517-g2/locations/us-central1
       availableMemoryMb: 256
       runtime: nodejs18
-      timeout: '30'
-      entryPoint: http
+      timeout: 60s
+      entryPoint: hello
       function: devel-gcp-serverless-function-hello
       sourceArchiveUrl: >-
-        gs://sls-gcp-serverless-function-devel-1715105413336/serverless/gcp-serverless-function/devel/1715105414804-2024-05-07T18:10:14.804Z/gcp-serverless-function.zip
+        gs://sls-gcp-serverless-function-devel-1715626554949/serverless/gcp-serverless-function/devel/1715630036224-2024-05-13T19:53:56.224Z/gcp-serverless-function.zip
       environmentVariables:
         PLATFORM_NAME: gcp-serverless-function
         ENV_STAGE: devel
       labels: {}
       httpsTrigger:
-        url:
-          path: hello
-          method: get
+        url: 'true'
