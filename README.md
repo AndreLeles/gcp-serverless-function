@@ -66,7 +66,7 @@ YOUR_PROJECT_ID = chromatic-baton-123-g2
 
 NAME@YOUR_PROJECT_ID.iam.gserviceaccount.com = chromatic-baton-123-g2@appspot.gserviceaccount.com
 ```sh
-gcloud projects add-iam-policy-binding YOUR_PROJECT_ID --member "serviceAccount:NAME@YOUR_PROJECT_ID.iam.gserviceaccount.com" --role "roles/owner"
+gcloud projects add-iam-policy-binding chromatic-baton-422517-g2 --member "serviceAccount:NAME@YOUR_PROJECT_ID.iam.gserviceaccount.com" --role "roles/cloudfunctions.admin"
 ```
 
 Apois essa configuração execute o deploy abaixo:
