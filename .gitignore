@@ -8,6 +8,7 @@ node_modules/
 *tmp.txt
 coverage
 .npmrc
+.gcloud
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
