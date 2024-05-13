@@ -1,4 +1,4 @@
-# gcp-serverless-function## 
+# gcp-serverless-function
 Usando Google Cloud Platform Serverless Framework : 
 Um guia passo a passo
 
